@@ -5,8 +5,13 @@
             <div class="row">
                 <div class="col-3"></div>
                 <div class="col-6 d-flex align-items-center my-3">
-                    <input class="form-control" type="text" placeholder="Add item">
-                    <button type="button" class="btn btn-primary mx-3">Add</button>
+                    <input class="form-control"
+                           type="text"
+                           v-model="item"
+                           placeholder="Add item">
+                    <button v-on:click="add(item)"
+                            type="button"
+                            class="btn btn-primary mx-3">Add</button>
                 </div>
                 <div class="col-3"></div>
             </div>
@@ -29,8 +34,19 @@
                 {id: 0, text: 'Овощи'},
                 {id: 1, text: 'Сыр'},
                 {id: 2, text: 'Что там ещё люди едят?'}
-            ]
-        })
+            ],
+            item: '',
+            id: 3
+        }),
+        methods: {
+            add: function (message) {
+                if (message) {
+                    this.list.push({id: this.id, text: message});
+                    this.id++;
+                    this.item = '';
+                }
+            }
+        }
     }
 </script>
 
@@ -60,11 +76,5 @@
 
     a {
         color: #42b983;
-    }
-
-    .btn-add {
-        padding: 0 10px;
-        cursor: pointer;
-        color: blue;
     }
 </style>
