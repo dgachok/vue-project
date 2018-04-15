@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <div class="hello">
+        <div class="container-fluid">
             <h1>Welcome to TodoList App!</h1>
             <div class="row">
                 <div class="col-3"></div>
@@ -9,13 +9,15 @@
                            type="text"
                            v-model="item"
                            placeholder="Add item">
-                    <button v-on:click="add(item)"
+                    <button @click="add(item)"
                             type="button"
                             class="btn btn-primary mx-3">Add</button>
                 </div>
                 <div class="col-3"></div>
             </div>
-            <List :list="list"></List>
+            <List :list="list"
+                  @done="done($event)"
+                  @remove="remove($event)"></List>
         </div>
     </div>
 </template>
@@ -45,6 +47,12 @@
                     this.id++;
                     this.item = '';
                 }
+            },
+            done: (event) => {
+                console.log('done item', event);
+            },
+            remove: (event) => {
+                console.log('remove item', event);
             }
         }
     }

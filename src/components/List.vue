@@ -2,17 +2,17 @@
     <table class="table">
         <tbody>
         <tr v-for="item in list"
-            v-bind:key="item.id">
+            :key="item.id">
             <th scope="row"
                 width="80%"
                 class="align-middle">
                 {{item.text}}
             </th>
             <td width="20%">
-                <button v-on:click="done('done')"
+                <button @click="done(item)"
                         type="button"
                         class="btn btn-success mx-2">Done</button>
-                <button v-on:click="remove('remove')"
+                <button @click="remove(item)"
                         type="button"
                         class="btn btn-danger mx-2">Remove item</button>
             </td>
@@ -28,11 +28,11 @@
             list: Array
         },
         methods: {
-            remove: function (message) {
-                alert(message)
+            remove: function (item) {
+                this.$emit('remove', item);
             },
-            done: function (message) {
-                alert(message)
+            done: function (item) {
+                this.$emit('done', item);
             }
         }
     }
